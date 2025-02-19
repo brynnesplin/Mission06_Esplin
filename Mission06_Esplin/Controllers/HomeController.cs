@@ -12,25 +12,27 @@ namespace Mission06_Esplin.Controllers
             _context = temp;
 
         }
-
+        // Home View
         public IActionResult Index()
         {
             return View();
         }
-
+        // Get to Know Joel View
         public IActionResult GetToKnowJoel()
         {
             return View();
         }
-
+        //Movie Form View
         public IActionResult MovieForm()
         {
             return View();
         }
 
+        // Saving a new movie
         [HttpPost]
-        public IActionResult MovieForm(Movie response) { 
-        
+        public IActionResult MovieForm(Movie response) {
+
+            // Success Message
             Console.WriteLine("MovieRating method was hit!");
 
             _context.Movies.Add(response);
