@@ -3,10 +3,18 @@
 
 <h1>Movie Form</h1>
 @* Form to add new movies *@
+@* Title, Rating, Edited, and CopiedToPlex are required *@
+
 <form method="post">
+    <input type="hidden" asp-for="MovieID" />
     <div>
-        <label asp-for="Category">Category:</label>
-        <input asp-for="Category" required />
+        <label asp-for="CategoryID">Movie Category</label>
+        <select asp-for="CategoryID">
+        <option value="">Select a Category</option>
+        @foreach (Category c in ViewBag.Categories){
+            <option value="@c.CategoryID">@c.CategoryName</option>
+        }
+        </select>
     </div>
     <div>
         <label asp-for="Title">Title:</label>
@@ -14,7 +22,11 @@
     </div>
     <div>
         <label asp-for="Director">Director:</label>
-        <input asp-for="Director" required />
+        <input asp-for="Director"/>
+    </div>
+    <div>
+        <label asp-for="Year">Year:</label>
+        <input asp-for="Year" type="number" min="1888"/>
     </div>
     <div>
         <label asp-for="Rating">Rating:</label>
@@ -27,14 +39,21 @@
     </div>
     <div>
     <label asp-for="Edited"></label>
-        <input asp-for="Edited" type="radio" value="true" id="yes" />
+        <input asp-for="Edited" type="radio" value="true" id="yes" required/>
         <label for="yes">yes</label>
-        <input asp-for="Edited" type="radio" value="false" id="no" />
+        <input asp-for="Edited" type="radio" value="false" id="no" required/>
         <label for="no">no</label>
     </div>
     <div>
         <label asp-for="LentTo">Lent to:</label>
         <input asp-for="LentTo"/>
+    </div>
+    <div>
+        <label asp-for="CopiedToPlex">Copied to Plex:</label>
+            <input asp-for="CopiedToPlex" label="yes" type="radio" value=1 id="yes" required/>
+            <label for="yes">yes</label>
+            <input asp-for="CopiedToPlex" type="radio" value=0 id="no" required/>
+            <label for="no">no</label>
     </div>
     <div>
         <label asp-for="Notes">Notes:</label>

@@ -17,41 +17,76 @@ namespace Mission06_Esplin.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.1");
 
+            modelBuilder.Entity("Mission06_Esplin.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryID");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("Mission06_Esplin.Models.Movie", b =>
                 {
                     b.Property<int>("MovieID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
+                    b.Property<string>("CategoryID")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("CategoryID1")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CopiedToPlex")
+                        .HasMaxLength(25)
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Director")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool?>("Edited")
+                        .IsRequired()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("LentTo")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Notes")
-                        .HasMaxLength(25)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Rating")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Year")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("MovieID");
 
+                    b.HasIndex("CategoryID1");
+
                     b.ToTable("Movies");
+                });
+
+            modelBuilder.Entity("Mission06_Esplin.Models.Movie", b =>
+                {
+                    b.HasOne("Mission06_Esplin.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryID1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }

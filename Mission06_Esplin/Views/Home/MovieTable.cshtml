@@ -1,0 +1,45 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<Movie>
+
+@* table of all the movies *@
+
+<table class="table table-striped">
+    <thead class="fw-bold">
+        <tr>
+            <td>Title</td>
+            <td>Year</td>
+            <td>Category</td>
+            <td>Director</td>
+            <td>Rating</td>
+            <td>Edited</td>
+            <td>LentTo</td>
+            <td>CopiedToPlex</td>
+            <td>Notes</td>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var temp in Model)
+        {
+        <tr>
+            <td>@temp.Title</td>
+            <td>@temp.Year</td>
+            <td>@temp.Category?.CategoryName</td>
+            <td>@temp.Director</td>
+            <td>@temp.Rating</td>
+            <td>@temp.Edited</td>
+            <td>@temp.LentTo</td>
+            <td>@temp.CopiedToPlex</td>
+            <td>@temp.Notes</td>
+            <td><a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@temp.MovieID">Edit</a></td>
+            <td><a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@temp.MovieID">Delete</a></td>
+        </tr>
+        }
+
+    </tbody>
+</table>
